@@ -1,0 +1,33 @@
+$background-color:blue;
+$step: 5;
+$pos-init:0;
+$translate: 75px;
+$max-top: 525px;
+.squares{
+	position: relative;
+}
+.square{
+	border: 2px solid black;
+	color: white;
+	font: 20px bold;
+	height: 100px;
+	line-height: 100px;
+	position: absolute;
+	text-align: center;
+	width: 100px;
+
+	@for $i from 1 through 7 {
+		&.s#{$i}{
+			background-color: darken($background-color, $step*$i);
+			left: $pos-init;
+			top: $max-top;
+			@if ($i==2) or ($i==6){
+				z-index: 3;
+			} @else if ($i==3) or ($i==5) {
+				z-index: 2;
+			}
+		}
+		$pos-init: $pos-init + $translate;
+		$max-top: $max-top - $translate;
+	}
+}
